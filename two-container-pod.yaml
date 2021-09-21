@@ -21,6 +21,6 @@ spec:
           image: reader
           volumeMounts:
               - name: shared-data
-                mountPath: /vol-reader
+                mountPath: /vol
                 readOnly: true
           imagePullPolicy: IfNotPresent
