@@ -1,9 +1,20 @@
-$`mkdir -p /vol`;
-$`rm -rf /vol/*`;
+import meow from "meow";
 
-for (let i = 0; i < 15; i++) {
+const {
+    flags: { loopUpTo },
+} = meow({
+    importMeta: import.meta,
+    flags: {
+        loopUpTo: { type: "string", default: "15" },
+    },
+});
+
+await $`mkdir -p /vol`;
+await $`rm -rf /vol/*`;
+
+for (let i = 0; i < +loopUpTo; i++) {
     await sleep(100);
-    await $`echo ${i} >> /vol/file`;
+    await $`echo ${i} > /vol/file`;
 }
 
 await $`cat /vol/file`;

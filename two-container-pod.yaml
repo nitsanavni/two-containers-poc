@@ -16,6 +16,12 @@ spec:
               - name: shared-data
                 mountPath: /vol
           imagePullPolicy: IfNotPresent
+          command:
+              - zx
+          args:
+              - writer.mjs
+              - --loop-up-to
+              - "200"
 
         - name: reader
           image: reader
@@ -24,3 +30,10 @@ spec:
                 mountPath: /vol
                 readOnly: true
           imagePullPolicy: IfNotPresent
+          command:
+              - zx
+          args:
+              - --quiet
+              - reader.mjs
+              - --wait-for-writer-iteration
+              - "180"
