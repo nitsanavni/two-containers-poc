@@ -17,8 +17,8 @@ while (true) {
     const curr = +String(await nothrow($`cat /vol-reader/file`));
 
     if (+waitForWriterIteration < curr) {
-        console.log(`reader found our ${curr}! iteration ${i}`);
-        process.exit(0);
+        console.log(`found our ${curr} from writer! iteration ${i}`);
+        process.exit();
     }
 
     await sleep(40);

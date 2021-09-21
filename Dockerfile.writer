@@ -3,7 +3,7 @@ FROM node:alpine3.14
 WORKDIR /writer
 
 RUN npm i -g zx
-RUN npm i meow
+RUN npm i meow lodash
 
 COPY . .
 

@@ -19,6 +19,7 @@ spec:
           command:
               - zx
           args:
+              - --quiet
               - writer.mjs
               - --loop-up-to
               - "200"
@@ -28,12 +29,10 @@ spec:
           volumeMounts:
               - name: shared-data
                 mountPath: /vol-reader
-                readOnly: true
+                # readOnly: true
           imagePullPolicy: IfNotPresent
           command:
-              - zx
+              - /bin/sh
           args:
-              - --quiet
-              - reader.mjs
-              - --wait-for-writer-iteration
-              - "180"
+              - -c
+              - "zx --quiet reader.mjs --wait-for-writer-iteration 20; echo 0 > /vol-reader/reader-done"
