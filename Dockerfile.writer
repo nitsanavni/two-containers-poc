@@ -1,0 +1,9 @@
+FROM node:alpine3.14
+
+WORKDIR /writer
+
+RUN npm i -g zx
+
+COPY . .
+
+CMD ["zx", "writer.mjs"]
