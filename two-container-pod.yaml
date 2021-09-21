@@ -15,9 +15,11 @@ spec:
           volumeMounts:
               - name: shared-data
                 mountPath: /vol
+          imagePullPolicy: IfNotPresent
 
         - name: reader
           image: reader
           volumeMounts:
               - name: shared-data
                 mountPath: /vol-reader
+          imagePullPolicy: IfNotPresent

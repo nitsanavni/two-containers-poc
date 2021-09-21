@@ -6,4 +6,4 @@ RUN npm i -g zx
 
 COPY . .
 
-CMD ["zx", "reader.mjs"]
+CMD ["zx", "--quiet", "reader.mjs"]
