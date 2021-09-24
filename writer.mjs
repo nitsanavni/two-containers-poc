@@ -20,9 +20,7 @@ for (let i = 0; i < +loopUpTo; i++) {
 
     await $`echo ${i} > /vol/file`;
 
-    const { stderr } = await nothrow($`cat /vol/reader-done`);
-
-    if (_.isEmpty(stderr)) {
+    if (!/\b333\b/m.test(await $`ps -o user`)) {
         console.log(`reader is done, I'm at ${i}`);
         await $`cat /vol/file`;
         process.exit();

@@ -1,10 +1,14 @@
 FROM node:alpine3.14
 
-WORKDIR /writer
+WORKDIR /reader
 
 RUN npm i -g zx
 RUN npm i meow
 
 COPY . .
+
+RUN addgroup -S appgroup && adduser -S reader -G appgroup --uid 333
+
+USER reader
 
 CMD ["zx", "--quiet", "reader.mjs"]

@@ -3,12 +3,11 @@ kind: Pod
 metadata:
     name: two-containers
 spec:
+    shareProcessNamespace: true
     restartPolicy: Never
-
     volumes:
         - name: shared-data
           emptyDir: {}
-
     containers:
         - name: writer
           image: writer
@@ -19,7 +18,7 @@ spec:
           command:
               - zx
           args:
-              - --quiet
+              #   - --quiet
               - writer.mjs
               - --loop-up-to
               - "200"
@@ -32,7 +31,9 @@ spec:
                 # readOnly: true
           imagePullPolicy: IfNotPresent
           command:
-              - /bin/sh
+              - zx
           args:
-              - -c
-              - "zx --quiet reader.mjs --wait-for-writer-iteration 20; echo 0 > /vol-reader/reader-done"
+              - --quiet
+              - reader.mjs
+              - --wait-for-writer-iteration
+              - "20"
